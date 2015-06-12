@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>All Forms</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .reg-error{color:red;}
+            .reg-success{color: green}
+            
+        </style>
+    </head>
+    <body>
+        <form name="myform" id="myform" enctype="multipart/form-data">
+                <table>
+                    
+                    <tr><td></td><td>Register</td></tr>
+                    <tr><td></td><td><span class="reg-error"></span><span class="reg-success"></span></td></tr>
+                    <tr><td>Name: </td><td><input name="name" id="name" type="text" /></td></tr>
+                    <tr><td>Email: </td><td><input name="email" id="email" type="text" /></td></tr>
+                    <tr><td>Password: </td><td><input name="password" id="password" type="password" /></td></tr>
+                  <tr><td>Profile Pic </td><td><input name="profile" id="profile" type="file" /></td></tr>
+                     <tr><td></td><td><button name="submit" id="submit" type="submit">Submit</button></td></tr>                    
+                    
+                </table>
+        </form>
+        
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+               console.log('hi'); 
+            });
+            
+            var base_url  =  'http://localhost/slim-examples/vinay-slim/api/';
+            
+            $("form#myform").submit(function(event){
+ 
+                    //disable the default form submission
+                    event.preventDefault();
+
+                    //grab all form data  
+                    var formData = new FormData($(this)[0]);
+$('.reg-error').html('');
+$('.reg-success').html('');
+                    $.ajax({
+                      url: base_url+'register',
+					  //url: 'submit.php',
+                      dataType: "json",
+                      type: 'POST',
+                      data: formData,
+                      async: false,
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+                      success: function (data) {
+                          console.log('MyDATA');
+                          console.log(data);
+                         
+                          
+//                              $('#myform').each(function(){ 
+//                                 this.reset();
+//                              });
+                             $('.reg-success').html(data.message);  
+                          
+                        console.log(data.error);
+                        console.log(data.message);
+                      },
+                      error: function(respData, status, error){
+                          var resp = jQuery.parseJSON(respData.responseText); 
+                          console.log('ERROR');
+                          console.log(resp.error);
+                          console.log(resp.message);
+                          
+                           if(resp.error){
+                                $('.reg-error').html(resp.message);
+                          }
+                      }
+                    });
+
+                    return false;
+                  });
+
+        </script>
+    </body>
+</html>

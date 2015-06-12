@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+
+   <form name="signin" id="signin" enctype="multipart/form-data">
+                <table>
+                    <tr><td><span class="reg-error"></span><span class="reg-success"></span></td></tr>
+                    <tr><td>Sign In</td></tr>                    
+                   
+                    <tr><td>Email: </td><td><input name="email" id="email" type="text" /></td></tr>
+                    <tr><td>Password: </td><td><input name="password" id="password" type="password" /></td></tr>
+                   
+                     <tr><td></td><td><button name="submit" id="signin-submit" type="submit">Submit</button></td></tr>                    
+                    
+                </table>
+        </form>
+        
+        <script src="js/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+               console.log('Sign In'); 
+            });
+            
+            var base_url  =  'http://localhost/slim-examples/vinay-slim/api/';
+            
+            $("form#signin").submit(function(event){
+ 
+                    //disable the default form submission
+                    event.preventDefault();
+
+                    //grab all form data  
+                    var formData = new FormData($(this)[0]);
+					
+/*$('.reg-error').html('');
+$('.reg-success').html('');*/
+                    $.ajax({
+                      url: base_url+'login',
+                      dataType: "json",
+                      type: 'POST',
+                      data: formData,
+                      async: false,
+                      cache: false,
+                      contentType: "application/json",
+                      processData: false,
+                      success: function (data) {
+              
+                      }
+                    });
+
+                    return false;
+                  });
+
+        </script>
+</body>
+</html>

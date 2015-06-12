@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>All Forms</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .reg-error{color:red;}
+            .reg-success{color: green}
+            
+        </style>
+    </head>
+    <body>
+        <form action="http://localhost/slim-examples/vinay-slim/api/register" name="regform" id="regform" enctype="multipart/form-data">
+                <table>
+                    <tr><td><span class="reg-error"></span><span class="reg-success"></span></td></tr>
+                    <tr><td>Register</td></tr>                    
+                    <tr><td>Name: </td><td><input name="name" id="name" type="text" /></td></tr>
+                    <tr><td>Email: </td><td><input name="email" id="email" type="text" /></td></tr>
+                    <tr><td>Password: </td><td><input name="password" id="password" type="password" /></td></tr>
+                    <tr><td>Profile Pic </td><td><input name="profile" id="profile" type="file" /></td></tr>
+                     <tr><td></td><td><button name="submit" id="submit" type="submit">Submit</button></td></tr>                    
+                    
+                </table>
+        </form>
+        
+        <script src="js/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+               console.log('hi'); 
+            });
+            
+            var base_url  =  'http://localhost/slim-examples/vinay-slim/api/';
+            
+        </script>
+    </body>
+</html>
